@@ -32,12 +32,19 @@ pub fn create<'info>(ctx: CpiContext<'_, '_, '_, 'info, Create<'info>>) -> Progr
 
 #[derive(Accounts)]
 pub struct Create<'info> {
+    /// CHECK:
     pub payer: AccountInfo<'info>,
+    /// CHECK:
     pub associated_token: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub system_program: AccountInfo<'info>,
+    /// CHECK:
     pub token_program: AccountInfo<'info>,
+    /// CHECK:
     pub rent: AccountInfo<'info>,
 }
 

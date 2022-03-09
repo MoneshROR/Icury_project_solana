@@ -1,7 +1,8 @@
 use anchor_lang::solana_program;
 use anchor_lang::solana_program::account_info::AccountInfo;
 use anchor_lang::solana_program::entrypoint::ProgramResult;
-// use anchor_lang::solana_program::program_error::ProgramError;
+use anchor_lang::solana_program::program_error::ProgramError;
+
 use anchor_lang::solana_program::program_pack::Pack;
 use anchor_lang::solana_program::pubkey::Pubkey;
 pub use anchor_lang::prelude::*;
@@ -249,70 +250,99 @@ pub fn set_authority<'a, 'b, 'c, 'info>(
 
 #[derive(Accounts)]
 pub struct Transfer<'info> {
+    /// CHECK:
     pub from: AccountInfo<'info>,
+    /// CHECK:
     pub to: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct MintTo<'info> {
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub to: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct Burn<'info> {
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub to: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct Approve<'info> {
+    /// CHECK:
     pub to: AccountInfo<'info>,
+    /// CHECK:
     pub delegate: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct InitializeAccount<'info> {
+    /// CHECK:
     pub account: AccountInfo<'info>,
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
+    /// CHECK:
     pub rent: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct CloseAccount<'info> {
+    /// CHECK:
     pub account: AccountInfo<'info>,
+    /// CHECK:
     pub destination: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct FreezeAccount<'info> {
+    /// CHECK:
     pub account: AccountInfo<'info>,
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct ThawAccount<'info> {
+    /// CHECK:
     pub account: AccountInfo<'info>,
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub authority: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct InitializeMint<'info> {
+    /// CHECK:
     pub mint: AccountInfo<'info>,
+    /// CHECK:
     pub rent: AccountInfo<'info>,
 }
 
 #[derive(Accounts)]
 pub struct SetAuthority<'info> {
+    /// CHECK:
     pub current_authority: AccountInfo<'info>,
+    /// CHECK:
     pub account_or_mint: AccountInfo<'info>,
 }
 
@@ -323,15 +353,15 @@ impl TokenAccount {
     pub const LEN: usize = spl_token::state::Account::LEN;
 }
 
-impl anchor_lang::AccountDeserialize for TokenAccount {
-    fn try_deserialize(buf: &mut &[u8]) -> Result<Self> {
-        TokenAccount::try_deserialize_unchecked(buf)
-    }
+// impl anchor_lang::AccountDeserialize for TokenAccount {
+//     fn try_deserialize(buf: &mut &[u8]) -> Result<Self> {
+//         TokenAccount::try_deserialize_unchecked(buf)
+//     }
 
-    fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self> {
-        spl_token::state::Account::unpack(buf).map(TokenAccount)
-    }
-}
+//     fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self> {
+//         spl_token::state::Account::unpack(buf).map(TokenAccount)
+//     }
+// }
 
 impl anchor_lang::AccountSerialize for TokenAccount {
     fn try_serialize<W: Write>(&self, _writer: &mut W) -> Result<()> {
@@ -361,15 +391,15 @@ impl Mint {
     pub const LEN: usize = spl_token::state::Mint::LEN;
 }
 
-impl anchor_lang::AccountDeserialize for Mint {
-    fn try_deserialize(buf: &mut &[u8]) -> Result<Self> {
-        Mint::try_deserialize_unchecked(buf)
-    }
+// impl anchor_lang::AccountDeserialize for Mint {
+//     fn try_deserialize(buf: &mut &[u8]) -> Result<Self> {
+//         Mint::try_deserialize_unchecked(buf)
+//     }
 
-    fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self> {
-        spl_token::state::Mint::unpack(buf).map(Mint)
-    }
-}
+//     fn try_deserialize_unchecked(buf: &mut &[u8]) -> Result<Self> {
+//         spl_token::state::Mint::unpack(buf).map(Mint)
+//     }
+// }
 
 impl anchor_lang::AccountSerialize for Mint {
     fn try_serialize<W: Write>(&self, _writer: &mut W) -> Result<()> {
