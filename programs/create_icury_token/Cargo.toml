@@ -2,6 +2,7 @@
 name = "create_icury_token"
 version = "0.1.0"
 description = "Created with Anchor"
+license = "Apache-2.0"
 edition = "2018"
 
 [lib]
@@ -9,11 +10,14 @@ crate-type = ["cdylib", "lib"]
 name = "create_icury_token"
 
 [features]
-no-entrypoint = []
-no-idl = []
-no-log-ix-name = []
-cpi = ["no-entrypoint"]
-default = []
+associated_token = ["spl-associated-token-account"]
+default = ["mint", "token", "associated_token"]
+mint = []
+token = []
+
 
 [dependencies]
 anchor-lang = "0.22.1"
+solana-program = "1.8.5"
+spl-token = "3.3.0"
+spl-associated-token-account = { version = "1.0.3", features = ["no-entrypoint"], optional = true }
